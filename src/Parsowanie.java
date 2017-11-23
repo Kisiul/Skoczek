@@ -10,6 +10,7 @@ public class Parsowanie {
 		private static int[] x;
 		private static int[] y;
 		private static int[] dl;
+		private int a;
 		private File f;
 		private Properties properties;
 		
@@ -59,9 +60,20 @@ public class Parsowanie {
 	            e.printStackTrace();
 	        }
 	    }
+	    //zwraca wartosc klucza properties, rzuca wyjatek, jesli zle podana nazwa klucza
+	    private void parsujv(String s)
+	    {
+	    	try {
+	    	a = Integer.parseInt(properties.getProperty(s));
+	    	} catch (IllegalArgumentException a) {
+	    		System.out.println("Sprawdz pisownie klucza properties"+ a);
+	    	}	
+	    }
+	    //wywoluje metode prywatana, bo nie moglem zroib dla returna try -kacza
 	    public int parsuj(String s)
 	    {
-	    	return Integer.parseInt(properties.getProperty(s));
+	    	parsujv(s);
+    		return a;
 	    }
 	    public Properties getProperties() {
 			return properties;

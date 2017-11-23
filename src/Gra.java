@@ -1,11 +1,17 @@
+import java.awt.EventQueue;
 
 public class Gra {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Parsowanie parsowanie = new Parsowanie();
-		parsowanie.loadProperties();
-		System.out.println("liczba przeszkod: "+ parsowanie.parsuj("liczba_przeszkod"));
+// tworze panel gry, ktory tworzy plansze, ktoraladuje plik konf i rysuje prostokaty
+		//docelowo panelgry trzeba uzupelnic o przyciski pauzy itp
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				new Panel_Gry();
+			}
+		});
 
 	}
 
