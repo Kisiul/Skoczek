@@ -9,14 +9,22 @@ import java.awt.BorderLayout;
 */
 public class Panel_Gry extends JFrame implements Runnable{
 	private Status status_gry;
-
+	private Parsowanie pars;
 
 	/** 
     * Konstruktor klasy.
     *
     * @param s Referencja do obiektu klasy Status.
     */
-	public Panel_Gry(Status s){status_gry = s;}
+	public Panel_Gry(Status s){
+		status_gry = s;
+		pars = new Parsowanie();
+		pars.loadProperties();
+		
+		Logika logika = new Logika(s);
+		Thread thread_logika = new Thread(logika);
+		thread_logika.start();
+	}
 
 	/** 
     * Metoda tworzaca glowne okno gry, wywolywana z metody run().
@@ -26,7 +34,7 @@ public class Panel_Gry extends JFrame implements Runnable{
 		Plansza panel = new Plansza();
 		
 		//ustawienie rozmiarow okna do wielkosci panelu gry
-		gra.setSize(panel.pars.parsuj("rozmiar_planszy_x")+10, panel.pars.parsuj("rozmiar_planszy_y")+10);
+		gra.setSize(pars.parsuj("rozmiar_planszy_x")+10, pars.parsuj("rozmiar_planszy_y")+10);
 		
 		JButton pauza = new JButton("pauza");
 		pauza.setBounds(300,10, 100, 20);
@@ -37,7 +45,6 @@ public class Panel_Gry extends JFrame implements Runnable{
 
 
     	// Akcja po wcisnieciu "pauza"
-
 		pauza.addActionListener(new ActionListener(){ 
 		public void actionPerformed(ActionEvent e){  
 				switch(status_gry.stan_gry){

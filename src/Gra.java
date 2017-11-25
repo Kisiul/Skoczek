@@ -18,6 +18,7 @@ public class Gra {
 		//Globalnie dostepny aktualny stan gry, do synchronizacji/komunikacji miedzy watkami.
 		//mozna tutaj dodac takie rzeczy, jak wyliczona pozycja ludzika, etc...
 		//narazie przechowuje tylko pauza lub gra.
+		// !fajnie byloby to zrobic jako singleton!
 		Status status_gry = new Status();
 
 		//tworze panele
