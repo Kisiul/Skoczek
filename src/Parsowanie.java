@@ -5,15 +5,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Klasa odczytujaca plik "properties" z konfiguracja gry
+ * Póki co czyta konkretny plik
+ */
 public class Parsowanie {
-		private static int liczba_przeszkod;
-		private static int[] x;
-		private static int[] y;
-		private static int[] dl;
 		private int a;
 		private File f;
 		private Properties properties;
 		
+		/**
+		 *Konstruktor
+		 *bez parametrow 
+		 */
 		public Parsowanie()
 		{
 		    //Plik z konfiguracj¹
@@ -26,27 +30,6 @@ public class Parsowanie {
 	 
 
 
-		/*public static void main(String[] args) {
-	        
-	        PropertiesTest pt = new PropertiesTest();
-	        pt.loadProperties();
-	        liczba_przeszkod = Integer.parseInt(properties.getProperty("liczba_przeszkod"));
-	        x = new int[liczba_przeszkod];
-	        y = new int[liczba_przeszkod];
-	        dl = new int[liczba_przeszkod];
-	        for (int i=0; i<liczba_przeszkod; i++)
-	        {
-	        	String ii = String.valueOf(i+1);
-	        	x[i] = Integer.parseInt(properties.getProperty("x".concat(ii)));
-	        	y[i] = Integer.parseInt(properties.getProperty("y".concat(ii)));
-	        	dl[i] = Integer.parseInt(properties.getProperty("dl".concat(ii)));
-	        }
-	        System.out.println("x[0]: "+x[0]+"  y[0]: "+y[0]+"  dl[0]: "+dl[0]);
-	        
-	    
-	        
-	    }
-	    */
 	    public void loadProperties(){
 	        //Strumieñ wejœciowy
 	        InputStream is;
