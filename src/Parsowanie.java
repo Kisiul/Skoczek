@@ -24,8 +24,11 @@ public class Parsowanie {
 		private File f;
 		private Properties properties;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 //<<<<<<< HEAD
 		
 		/**
@@ -33,6 +36,9 @@ public class Parsowanie {
 		 *bez parametrow 
 		 */
 //=======
+<<<<<<< HEAD
+>>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
+=======
 >>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 /**
 *	Konstruktor
@@ -51,9 +57,12 @@ public class Parsowanie {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	    public void loadProperties(int numer_planszy){
 =======
+=======
+>>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 	    public void loadProperties(){
 >>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 	        //Strumieñ wejœciowy
