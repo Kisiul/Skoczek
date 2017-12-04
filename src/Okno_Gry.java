@@ -108,8 +108,8 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		}*/
 		//logika.uaktualnij_pozycje(evt);
 		//System.out.println("skldfbls");
-		//logika.pisz();
-		panel.pisz();
+		logika.pisz();
+		//panel.pisz();
 		//panel.repaint();
 	}
 
