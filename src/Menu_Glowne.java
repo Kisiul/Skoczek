@@ -27,7 +27,7 @@ public class Menu_Glowne implements Runnable, KeyListener{
 	*/
 	public synchronized void Menu_Glowne_Rozpocznij(){
 		JFrame okno = new JFrame("Menu Glowne");
-		okno.setSize(400, 600);
+		okno.setSize(400, 500);
 		JButton nowa_gra = new JButton("Nowa Gra");
 		nowa_gra.setBounds(150, 50, 100, 30);
 		

@@ -22,7 +22,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 	public Okno_Gry(Status s){
 		status_gry = s;
 		pars = new Parsowanie();
-		pars.loadProperties();
+		pars.loadProperties(1);
 		
 		Logika logika = new Logika(s);
 		Thread thread_logika = new Thread(logika);
@@ -38,7 +38,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		panel = new Plansza();
 		
 		//ustawienie rozmiarow okna do wielkosci panelu gry
-		gra.setSize(pars.parsuj("rozmiar_planszy_x")+10, pars.parsuj("rozmiar_planszy_y")+10);
+		gra.setSize(600, 400);//pars.parsuj("rozmiar_planszy_x")+10, pars.parsuj("rozmiar_planszy_y")+10);
 		
 		JButton b_pauza = new JButton("pauza");
 		b_pauza.setBounds(300,10, 100, 20);
@@ -57,7 +57,6 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 				case PAUZA:
 					status_gry.stan_gry = Status.Stan.GRA;
 					b_pauza.setText("gra");
-					gra.setFocusable(true);
 					break;
 				}
 	        	System.out.println(status_gry.stan_gry);
@@ -70,6 +69,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		gra.setLayout(new BorderLayout());
 		gra.add(b_pauza, BorderLayout.PAGE_START);
 		gra.add(panel, BorderLayout.CENTER);
+		
 		gra.setFocusable(true);
 		gra.addKeyListener(this);
 
@@ -87,26 +87,30 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent evt) {		
-		switch(evt.getKeyCode())
+		/*switch(evt.getKeyCode())
 		{
 		case 37:
-			panel.skoczek.setPozycja_skoczka_x(panel.skoczek.getPozycja_skoczka_x()-10);
-			System.out.println("lewo");
+			logika.pisz();
+			panel.
 			break;
 		case 38:
-			panel.skoczek.setPozycja_skoczka_y(panel.skoczek.getPozycja_skoczka_y()-10);
+			logika.uaktualnij_pozycje(3);
 			break;
 		case 39:
-			panel.skoczek.setPozycja_skoczka_x(panel.skoczek.getPozycja_skoczka_x()+10);
+			logika.uaktualnij_pozycje(2);
 			break;
 		case 40:
-			panel.skoczek.setPozycja_skoczka_y(panel.skoczek.getPozycja_skoczka_y()+10);
+			logika.uaktualnij_pozycje(4);
 			break;
 		default:
 			System.out.println("asdf");
 			break;
-		}
-		panel.repaint();
+		}*/
+		//logika.uaktualnij_pozycje(evt);
+		//System.out.println("skldfbls");
+		//logika.pisz();
+		panel.pisz();
+		//panel.repaint();
 	}
 
 	@Override

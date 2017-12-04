@@ -19,7 +19,7 @@ public class Panel_Gry extends JFrame implements Runnable{
 	public Panel_Gry(Status s){
 		status_gry = s;
 		pars = new Parsowanie();
-		pars.loadProperties();
+		pars.loadProperties(1);
 		
 		Logika logika = new Logika(s);
 		Thread thread_logika = new Thread(logika);

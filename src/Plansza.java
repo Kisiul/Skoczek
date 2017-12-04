@@ -1,7 +1,7 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 
@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 
 public class Plansza extends JPanel {
 	public Parsowanie pars;
-	private int x;
-	public Skoczek skoczek;
 
 /**
 *	Konstruktor.
@@ -25,13 +23,11 @@ public class Plansza extends JPanel {
 		
 		//laduje konfiguracje
 		pars = new Parsowanie();
-		pars.loadProperties();
+		pars.loadProperties(1);
 		// rozmiar planszy odczytany z pliku
 		setPreferredSize(new Dimension(pars.parsuj("rozmiar_planszy_x"), pars.parsuj("rozmiar_planszy_y")));
 		// Utworzenie skoczka i jego pozycja ustawiana z pliku
-		skoczek = new Skoczek();
-		skoczek.setPozycja_skoczka_x(pars.parsuj("pierwotna_pozycja_skoczka_x"));
-		skoczek.setPozycja_skoczka_y(pars.parsuj("pierwotna_pozycja_skoczka_y"));
+
 		
 	}
 	
@@ -45,9 +41,12 @@ public class Plansza extends JPanel {
 		{
 			g2d.fillRect(pars.parsuj("x"+(i+1)), pars.parsuj("y"+(i+1)), pars.parsuj("dl"+(i+1)), 12 );
 		}
-		g2d.setColor(skoczek.getKolor());
-		g2d.fillRect(skoczek.getPozycja_skoczka_x(), skoczek.getPozycja_skoczka_y(), 30, 30);
+		g2d.setColor(Color.GRAY);
+		g2d.fillRect(Status.pozycja_gracza[0], Status.pozycja_gracza[1] , 30, 30);
 	}
-
+	public void pisz()
+	{
+		System.out.println("skldfbls");
+	}
 
 }

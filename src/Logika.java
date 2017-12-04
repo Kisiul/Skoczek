@@ -1,3 +1,4 @@
+import java.awt.event.KeyEvent;
 
 /**
 *	Klasa obliczajaca wszystko, co sie dzieje z graczem.
@@ -13,15 +14,32 @@ Parsowanie pars;
 	Logika(Status s){
 		stan_gry = s;
 		pars = new Parsowanie();
-		pars.loadProperties();
+		pars.loadProperties(1);
 	}
 
-	public void uaktualnij_pozycje(){
-		int x;
-		int y;
-		x = /*dlugie i skomplikowane obliczenia*/ 0;
-		y = /*dlugie i skomplikowane obliczenia*/ 0;
+	public void uaktualnij_pozycje(KeyEvent evt){
+		/*int x = 0;
+		int y=0;
+		switch(i)
+		{
+		case 1:
+			x= stan_gry.wez_pozycje_x()-10;
+			break;
+		case 2:
+			x= stan_gry.wez_pozycje_x()+10;
+			break;
+		case 3:
+			x= stan_gry.wez_pozycje_y()-10;
+			break;
+		case 4:
+			x= stan_gry.wez_pozycje_y()+10;
+			break;
+			default:
+				break;
+		}
 		stan_gry.ustaw_pozycje(x, y);
+		*/
+		System.out.println("skldfbls");
 	}
 
 	public void uaktualnij_bonusy(){
@@ -31,6 +49,11 @@ Parsowanie pars;
 	public void uaktualnij_punkty(){
 
 	}
+	public void laduj_z_pliku_na_poczatku_poziomu()
+	{
+		stan_gry.ustaw_pozycje(pars.parsuj("pierwotna_pozycja_skoczka_x"), pars.parsuj("pars.parsuj(pierwotna_pozycja_skoczka_y"));
+		stan_gry.ustaw_bonusy(pars.parsuj("bonus_jestpack"), pars.parsuj("bonus_mlotek"), pars.parsuj("bonus_niepamietam"));
+	}
 
 	private void logika_rozpocznij(){
 		//tutaj nalezaloby ustawic nasluchiwanie klawiszy itp.
@@ -39,6 +62,10 @@ Parsowanie pars;
 	public void run(){
 		logika_rozpocznij();
 		System.out.println("Logika ruszyla");
+	}
+	public void pisz()
+	{
+		System.out.println("skldfbls");
 	}
 
 	// TODO: Trzeba sie jeszcze zastanowic nad jakas funkcja wymuszajaca odswiezanie ekranu.

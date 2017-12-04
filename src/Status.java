@@ -22,7 +22,7 @@ public class Status{
 /**
 *	Wspolrzedne gracza na ekranie
 */
-	private static int[] pozycja_gracza;
+	public static int[] pozycja_gracza;
 	private static int bonus_jetpack;
 	private static int bonus_mlotek;
 	private static int bonus_niepamietam;
