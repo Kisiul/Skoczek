@@ -25,8 +25,11 @@ public class Parsowanie {
 		private Properties properties;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 =======
 >>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 //<<<<<<< HEAD
@@ -37,6 +40,9 @@ public class Parsowanie {
 		 */
 //=======
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
+=======
 >>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 =======
 >>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
@@ -58,9 +64,12 @@ public class Parsowanie {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	    public void loadProperties(int numer_planszy){
 =======
+=======
+>>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 =======
 >>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
 	    public void loadProperties(){
