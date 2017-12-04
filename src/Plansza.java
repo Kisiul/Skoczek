@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class Plansza extends JPanel {
 	public Parsowanie pars;
 	private int x;
+	public Skoczek skoczek;
 
 /**
 *	Konstruktor.
@@ -27,6 +28,11 @@ public class Plansza extends JPanel {
 		pars.loadProperties();
 		// rozmiar planszy odczytany z pliku
 		setPreferredSize(new Dimension(pars.parsuj("rozmiar_planszy_x"), pars.parsuj("rozmiar_planszy_y")));
+		// Utworzenie skoczka i jego pozycja ustawiana z pliku
+		skoczek = new Skoczek();
+		skoczek.setPozycja_skoczka_x(pars.parsuj("pierwotna_pozycja_skoczka_x"));
+		skoczek.setPozycja_skoczka_y(pars.parsuj("pierwotna_pozycja_skoczka_y"));
+		
 	}
 	
 	@Override
@@ -39,6 +45,9 @@ public class Plansza extends JPanel {
 		{
 			g2d.fillRect(pars.parsuj("x"+(i+1)), pars.parsuj("y"+(i+1)), pars.parsuj("dl"+(i+1)), 12 );
 		}
+		g2d.setColor(skoczek.getKolor());
+		g2d.fillRect(skoczek.getPozycja_skoczka_x(), skoczek.getPozycja_skoczka_y(), 30, 30);
 	}
+
 
 }
