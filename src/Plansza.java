@@ -41,8 +41,14 @@ public class Plansza extends JPanel {
 		{
 			g2d.fillRect(pars.parsuj("x"+(i+1)), pars.parsuj("y"+(i+1)), pars.parsuj("dl"+(i+1)), 12 );
 		}
+		
+		//rysuje skoczka
 		g2d.setColor(Color.GRAY);
 		g2d.fillRect(Status.pozycja_gracza[0], Status.pozycja_gracza[1] , 30, 30);
+		//rysuje cel
+		g2d.setColor(Color.blue);
+		g2d.fillRect(pars.parsuj("cel_skoczka_x"),  pars.parsuj("cel_skoczka_y") , 30, 30);
+		
 	}
 	public void pisz()
 	{

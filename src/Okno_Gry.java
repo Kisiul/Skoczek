@@ -27,7 +27,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		Logika logika = new Logika(s);
 		Thread thread_logika = new Thread(logika);
 		thread_logika.start();
-
+		
 	}
 
 	/** 
@@ -36,6 +36,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 	public synchronized void Panel_Gry_Rozpocznij(){
 		gra = new JFrame("Gra");
 		panel = new Plansza();
+		
 		
 		//ustawienie rozmiarow okna do wielkosci panelu gry
 		gra.setSize(600, 400);//pars.parsuj("rozmiar_planszy_x")+10, pars.parsuj("rozmiar_planszy_y")+10);
@@ -108,9 +109,10 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		}*/
 		//logika.uaktualnij_pozycje(evt);
 		//System.out.println("skldfbls");
-		logika.pisz();
+		//logika.pisz();
 		//panel.pisz();
 		//panel.repaint();
+		logika.uaktualnij_bonusy();
 	}
 
 	@Override

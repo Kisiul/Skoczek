@@ -49,9 +49,7 @@ public class Menu_Glowne implements Runnable, KeyListener{
 		
 		// jakies graficzne instrukcje.
 		okno.add(nowa_gra);
-		//okno.add(tf);
-		//okno.setFocusable(true);
-		//okno.addKeyListener(this);
+
 		okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		okno.setLayout(null);
 		okno.setVisible(true);

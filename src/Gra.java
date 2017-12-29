@@ -10,8 +10,8 @@ public class Gra {
 
 	public static void main(String[] args) {
 		// tworze panel gry, ktory tworzy plansze, ktoraladuje plik konf i rysuje prostokaty
-=======
-*	Gra Skoczek.
+
+/*	Gra Skoczek.
 *
 *	Projekt programistyczny z przedmiotu PROZE.
 *	Opiekun: Krystian Ignasiak
@@ -19,11 +19,9 @@ public class Gra {
 *	@author Radoslaw Maksymiuk
 *	@author Krzysztof Dabrowski
 */
-public class Gra {
 
-	public static void main(String[] args) {
 		//tworze panel gry, ktory tworzy plansze, ktoraladuje plik konf i rysuje prostokaty
->>>>>>> 02f596e0c82c80092102d0f330d3b1488ac6c4a9
+
 		//docelowo panelgry trzeba uzupelnic o przyciski pauzy itp
 
 		//Globalnie dostepny aktualny stan gry, do synchronizacji/komunikacji miedzy watkami.

@@ -18,39 +18,24 @@ import java.util.Properties;
 *
 *	Klasa zawierajaca metody do parsowania plikow konfiguracyjnych.
 */
-//>>>>>>> 02f596e0c82c80092102d0f330d3b1488ac6c4a9
+
 public class Parsowanie {
 		private int a;
 		private File f;
 		private Properties properties;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
-=======
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
-//<<<<<<< HEAD
 		
 		/**
 		 *Konstruktor
 		 *bez parametrow 
 		 */
 //=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
-=======
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
-=======
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
+
 /**
 *	Konstruktor
 *
 */
-//>>>>>>> 02f596e0c82c80092102d0f330d3b1488ac6c4a9
+
 		public Parsowanie()
 		{
 		    //Plik z konfiguracj¹
@@ -62,18 +47,11 @@ public class Parsowanie {
 	 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
 	    public void loadProperties(int numer_planszy){
-=======
-=======
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
-=======
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
-	    public void loadProperties(){
->>>>>>> 165be2c42c8802b45ebca90ce56a080322fbb77b
+
+
 	        //Strumieñ wejœciowy
 	        InputStream is;
 	        f= new File("plansza" + numer_planszy +".properties");
