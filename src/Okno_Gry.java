@@ -7,12 +7,13 @@ import java.awt.BorderLayout;
 *
 * Zawiera panel gry- "plansza", oraz przyciski sterujace gra.
 */
-public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
+public class Okno_Gry extends JFrame implements  KeyListener{//, Runnable{
 	private Status status_gry;
 	private Parsowanie pars;
 	Logika logika;
 	JFrame gra;
-	Plansza panel;
+	private Plansza plansza;
+
 
 	/** 
     * Konstruktor klasy.
@@ -24,10 +25,11 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		pars = new Parsowanie();
 		pars.loadProperties();
 		
-		Logika logika = new Logika(s);
-		Thread thread_logika = new Thread(logika);
-		thread_logika.start();
-
+		logika = new Logika(s);
+		plansza = new Plansza(s);
+		//Thread thread_logika = new Thread(logika);
+		//thread_logika.start();
+		Panel_Gry_Rozpocznij();
 	}
 
 	/** 
@@ -35,7 +37,6 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
     */
 	public synchronized void Panel_Gry_Rozpocznij(){
 		gra = new JFrame("Gra");
-		panel = new Plansza();
 		
 		//ustawienie rozmiarow okna do wielkosci panelu gry
 		gra.setSize(pars.parsuj("rozmiar_planszy_x")+10, pars.parsuj("rozmiar_planszy_y")+10);
@@ -43,9 +44,6 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 		JButton b_pauza = new JButton("pauza");
 		b_pauza.setBounds(300,10, 100, 20);
 		
-		
-
-
     	// Akcja po wcisnieciu "pauza"
 		b_pauza.addActionListener(new ActionListener(){ 
 		public void actionPerformed(ActionEvent e){  
@@ -53,6 +51,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 				case GRA:
 					status_gry.stan_gry = Status.Stan.PAUZA;	
 					b_pauza.setText("pauza");
+					gra.setFocusable(true);
 					break;
 				case PAUZA:
 					status_gry.stan_gry = Status.Stan.GRA;
@@ -69,9 +68,12 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 
 		gra.setLayout(new BorderLayout());
 		gra.add(b_pauza, BorderLayout.PAGE_START);
-		gra.add(panel, BorderLayout.CENTER);
+		gra.add(plansza, BorderLayout.CENTER);
 		gra.setFocusable(true);
 		gra.addKeyListener(this);
+		//gra.addKeyListener(panel);
+		gra.addKeyListener(logika);
+
 
 		pack();
 		gra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,12 +82,12 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 	
 	/** 
     * Metoda do wywolania w nowym watku.
-    */
+    *
 	public void run(){
 		Panel_Gry_Rozpocznij();
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public void keyPressed(KeyEvent evt) {		
 		switch(evt.getKeyCode())
 		{
@@ -107,7 +109,7 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 			break;
 		}
 		panel.repaint();
-	}
+	}*/
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
@@ -118,6 +120,34 @@ public class Okno_Gry extends JFrame implements  Runnable, KeyListener{
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent evt) {
+		switch(evt.getKeyCode())
+		{
+		case 37:
+			System.out.println("lewo");
+			logika.lewo();
+			break;
+		case 38:
+			System.out.println("gora");
+			logika.gora();
+			break;
+		case 39:
+			System.out.println("prawo");
+			logika.prawo();
+			break;
+		case 40:
+			System.out.println("dol");
+			logika.dol();
+			break;
+		default:
+			System.out.println("asdf");
+			break;
+		}
+		plansza.repaint();
 		
 	}
 

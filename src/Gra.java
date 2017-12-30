@@ -26,11 +26,11 @@ public class Gra {
 
 
 		//tworze watki
-		Thread thread_menu_glowne = new Thread(menu_glowne);
+		//Thread thread_menu_glowne = new Thread(menu_glowne);
 
 
 		//uruchamiam watki
-		thread_menu_glowne.start();
+		//thread_menu_glowne.start();
 
 
 	}
