@@ -57,8 +57,8 @@ public class Menu_Glowne {//implements Runnable{
 	/**
 	*	Funkcja do wywolania w nowym watku, implementuje interfejs Runnable.
 	*
-	public void run(){
-		Menu_Glowne_Rozpocznij();
-	}
-*/
+	*public void run(){
+	*	Menu_Glowne_Rozpocznij();
+	*}
+	*/
 }

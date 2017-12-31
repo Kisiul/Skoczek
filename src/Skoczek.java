@@ -2,8 +2,8 @@ import java.awt.Color;
 
 /**
  *Klasa zawiera dane biegajacego ludzika:
-	- pozycje
-	- grafike-obrazek/animacje
+ *	- pozycje
+ *	- grafike-obrazek/animacje
  */
 public class Skoczek {
 	private int pozycja_skoczka_x;
