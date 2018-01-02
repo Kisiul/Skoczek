@@ -18,6 +18,7 @@ public class Menu_Glowne {//implements Runnable{
 	*/
 	Menu_Glowne(Status s){
 		status_gry = s;
+		Okno_Gry okno;
 		Menu_Glowne_Rozpocznij();
 		}
 
@@ -42,8 +43,11 @@ public class Menu_Glowne {//implements Runnable{
               		Okno_Gry panel_1 = new Okno_Gry(status_gry); 
 					//Thread thread_panel_gry = new Thread(panel_1);
 					status_gry.stan_gry = Status.Stan.PAUZA;
+					okno.setVisible(false);
+
 					//thread_panel_gry.start();
 				}
+              	
         	}  
     	});
 		

@@ -1,9 +1,13 @@
 import java.awt.event.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import java.util.concurrent.TimeUnit;
+
 import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 /**
 *	Klasa obliczajaca wszystko, co sie dzieje z graczem.
@@ -13,6 +17,9 @@ public class Logika implements Interfejs_Skoczka, KeyListener{
 
 Status stan_gry;
 Parsowanie pars;
+
+private boolean koniec;
+
 Toolkit toolkit;
 Timer timer_logiczny;
 
@@ -23,9 +30,12 @@ Timer timer_logiczny;
 		stan_gry = s;
 		pars = new Parsowanie();
 		pars.loadProperties();
+
+		koniec = false;
+
 		toolkit = Toolkit.getDefaultToolkit();
 		timer_logiczny = new Timer();
-		timer_logiczny.schedule(new LogikaTask(s), 0, 1 * 20); //co 20ms uaktualniana bedzie pozycja gracza.
+		timer_logiczny.schedule(new LogikaTask(this), 0, 1 * 20); //co 20ms uaktualniana bedzie pozycja gracza.
 	}
 
 	public void uaktualnij_pozycje(int x, int y){
@@ -41,6 +51,35 @@ Timer timer_logiczny;
 	public void uaktualnij_punkty(){
 
 	}
+	
+	public void ruch()
+	{ 
+		//musi kazda przeszkode obadac za kazdym razem, wydaje sie malo optymalne, ale takie zycie
+		for (int i=1; i<=pars.parsuj("liczba_przeszkod"); i++)
+		{
+		if (stan_gry.wez_predkosc_y()>0) //jak spada na przeszkode, to ma sie na niej zatrzymac, a jak od dolu to sie odbic
+		{
+			if (skoczek_lewo() < przeszkoda_prawo(i) && skoczek_prawo()> przeszkoda_lewo(i) && skoczek_dol()>przeszkoda_gora(i) && skoczek_gora()<przeszkoda_gora(i))
+			{
+				stan_gry.ustaw_predkosc(0, 0);
+			}	
+		}
+		else
+			if (skoczek_lewo() < przeszkoda_prawo(i) && skoczek_prawo()> przeszkoda_lewo(i) && skoczek_gora()<przeszkoda_dol(i) && skoczek_dol()>przeszkoda_dol(i))
+					{
+						stan_gry.ustaw_predkosc(stan_gry.wez_predkosc_x(), stan_gry.wez_predkosc_y()*-1);
+					}
+		//od bokow ma sie odbijac
+		if (skoczek_dol() > przeszkoda_gora(i) && skoczek_gora() < przeszkoda_dol(i) && (skoczek_prawo() == przeszkoda_lewo(i)|| skoczek_lewo() == przeszkoda_prawo(i)))
+		{
+			stan_gry.ustaw_predkosc(stan_gry.wez_predkosc_x()*-1, stan_gry.wez_predkosc_y());
+		}
+		}
+		stan_gry.ustaw_pozycje(stan_gry.wez_pozycje_x() + stan_gry.wez_predkosc_x(), stan_gry.wez_pozycje_y() + stan_gry.wez_predkosc_y()); 
+		
+
+	}
+	
 	public void lewo()
 	{
 		stan_gry.ustaw_predkosc(stan_gry.wez_predkosc_x()-1, stan_gry.wez_predkosc_y());
@@ -55,12 +94,13 @@ Timer timer_logiczny;
 	}
 	public void dol()
 	{
-		stan_gry.ustaw_predkosc(stan_gry.wez_predkosc_x(), stan_gry.wez_predkosc_y()+1);
+			stan_gry.ustaw_predkosc(stan_gry.wez_predkosc_x(), stan_gry.wez_predkosc_y()+1);
 	}
 
-	private void logika_rozpocznij(){
-		int x = pars.parsuj("pierwotna_pozycja_skoczka_x");
-		int y = pars.parsuj("pierwotna_pozycja_skoczka_y");
+
+	public void logika_rozpocznij() {
+		int x = 10; //pars.parsuj("pierwotna_pozycja_skoczka_x");
+		int y = 10;//pars.parsuj("pierwotna_pozycja_skoczka_y");
 		uaktualnij_pozycje(x, y);
 	}
 
@@ -124,6 +164,48 @@ Timer timer_logiczny;
 		// TODO Auto-generated method stub
 		
 	}
+	public void zakoncz()
+	{
+		koniec = true;
+	}
+	
+	// wspolrzedne y skoczka dolnej krawedzi
+	public int skoczek_dol()
+	{
+		return stan_gry.wez_pozycje_y()+pars.parsuj("rozmiar_skoczka");
+	}
+	public int skoczek_gora()
+	{
+		return stan_gry.wez_pozycje_y();
+	}
+	public int skoczek_lewo()
+	{
+		return stan_gry.wez_pozycje_x();
+	}
+	public int skoczek_prawo()
+	{
+		return stan_gry.wez_pozycje_x()+pars.parsuj("rozmiar_skoczka");
+	}
+	public int przeszkoda_dol(int i)
+	{
+		return pars.parsuj("y"+i)+12;
+	}
+	public int przeszkoda_gora(int i)
+	{
+		return pars.parsuj("y"+i);
+	}
+	public int przeszkoda_prawo(int i)
+	{
+		return pars.parsuj("x"+i)+pars.parsuj("dl"+i);
+	}
+	public int przeszkoda_lewo(int i)
+	{
+		return pars.parsuj("x"+i);
+	}
+	
+	
+	
+	
 
 
 }

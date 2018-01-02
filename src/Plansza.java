@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 *	Wczytuje ustawienia bezposrednio z parsowanego pliku conf.properties.
 */
 
-public class Plansza extends JPanel implements KeyListener {
+public class Plansza extends JPanel {
 	Status stan_gry;
 	public Parsowanie pars;
 	//private int x;
@@ -53,42 +53,10 @@ public class Plansza extends JPanel implements KeyListener {
 			g2d.fillRect(pars.parsuj("x"+(i+1)), pars.parsuj("y"+(i+1)), pars.parsuj("dl"+(i+1)), 12 );
 		}
 		g2d.setColor(Color.RED);
-		g2d.fillRect(stan_gry.wez_pozycje_x(), stan_gry.wez_pozycje_y(), 30, 30);
+		g2d.fillRect(stan_gry.wez_pozycje_x(), stan_gry.wez_pozycje_y(), pars.parsuj("rozmiar_skoczka"), pars.parsuj("rozmiar_skoczka"));
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		switch(e.getKeyCode())
-		{
-		case 37:
-			System.out.println("alewo");
-			break;
-		case 38:
-			System.out.println("agora");
-			break;
-		case 39:
-			System.out.println("aprawo");
-			break;
-		case 40:
-			System.out.println("adol");
-			break;
-		default:
-			System.out.println("aasdf");
-			break;
-		}		
-	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 

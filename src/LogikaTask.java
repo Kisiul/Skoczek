@@ -2,12 +2,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class LogikaTask extends TimerTask {
-Status stan_gry;
+Logika logika;
 
-LogikaTask(Status s){
-  stan_gry = s;
+LogikaTask(Logika l){
+  logika = l;
 }
     public void run() {
-      stan_gry.ustaw_pozycje(stan_gry.wez_pozycje_x() + stan_gry.wez_predkosc_x(), stan_gry.wez_pozycje_y() + stan_gry.wez_predkosc_y());
+    	  logika.ruch();
     }
   }
