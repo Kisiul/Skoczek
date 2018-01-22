@@ -87,7 +87,7 @@ public class Okno_Gry extends JFrame implements  KeyListener{//, Runnable{
 					break;
 				}
 	        	System.out.println(status_gry.stan_gry);
-		}
+			}
     	});
 
 
