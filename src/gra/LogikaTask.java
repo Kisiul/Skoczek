@@ -1,3 +1,4 @@
+package gra;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,6 +9,6 @@ LogikaTask(Logika l){
   logika = l;
 }
     public void run() {
-    	  logika.ruch();
+    	  logika.uaktualnij_pozycje();
     }
   }

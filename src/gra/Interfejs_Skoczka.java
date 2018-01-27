@@ -1,3 +1,4 @@
+package gra;
 public interface Interfejs_Skoczka{
 	
 	void uaktualnij_pozycje();

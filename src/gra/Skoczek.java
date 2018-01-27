@@ -1,3 +1,6 @@
+//klasa zupelnie nie uzywana
+
+package gra;
 import java.awt.Color;
 
 /**

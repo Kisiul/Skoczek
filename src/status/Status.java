@@ -1,3 +1,9 @@
+package status;
+
+import gra.Logika;
+import okna.Okno_Gry;
+import okna.Okno_MenuGlowne;
+import okna.Okno_Ranking;
 
 /**
 * Klasa przechowujaca globalny status gry.
@@ -6,6 +12,7 @@
 */
 
 public class Status{
+	private static Status INSTANCE;
 
 /**
 *	Dostepne stany gry.
@@ -14,7 +21,8 @@ public class Status{
 	public enum Stan{
 		MENU_GL, GRA, PAUZA;
 	}
-/**
+
+	/**
 *	Aktualny stan gry.
 *
 */	
@@ -27,11 +35,14 @@ public class Status{
 	private static int bonus_jetpack;
 	private static int bonus_mlotek;
 	private static int bonus_niepamietam;
+	private long czas_start, czas;
+	private boolean pauza;
 /**
 *	Konstruktor
 *
 */
-	Status(){
+	private Status() {
+    
 		stan_gry = Stan.MENU_GL;
 		pozycja_gracza = new int[2];
 		pozycja_gracza[0] = 0;
@@ -42,6 +53,22 @@ public class Status{
 		bonus_jetpack = 0; //potem bedzie trzeba to tez sparsowac
 		bonus_mlotek = 0;
 		bonus_niepamietam = 0;
+		czas_start = 0;
+		czas = 0;
+		pauza = false;
+//kjhkhgkjhgbkhbkjhbkjhvkhvkhvkjhblijhdfgldjglisugjs;odijeltijselivtnaleirthnaslithnalnifhsnlfgj
+	}
+	
+	public void tick()
+	{
+		switch(stan_gry)
+		{
+		case MENU_GL:
+		{
+			;
+			break;
+		}
+		}	
 	}
 
 	public synchronized void ustaw_pozycje(int x, int y){
@@ -58,6 +85,14 @@ public class Status{
 		bonus_jetpack = j;
 		bonus_mlotek = m;
 		bonus_niepamietam = n;
+	}
+	public void ustaw_czas_start(long l)
+	{
+		czas_start = l;
+	}
+	public void ustaw_czas(long l)
+	{
+		czas = l;
 	}
 
 	public synchronized Stan wez_stan_gry(){
@@ -91,4 +126,34 @@ public class Status{
 	public synchronized int wez_niepamietam(){
 		return bonus_niepamietam;
 	}
+	public long wez_czas_start()
+	{
+		return czas_start;
+	}
+	public long wez_czas()
+	{
+		return czas; 
+	}
+	public void  setPauza(boolean b)
+	{
+		pauza = b;
+	}
+	public boolean getPauza()
+	{
+		return pauza;
+	}
+	
+
+
+//singletowy getinstance
+	public static Status getInstance() {
+        if (INSTANCE == null)
+            synchronized (Status.class) {
+                if (INSTANCE == null)
+                    INSTANCE = new Status();
+            }
+        return INSTANCE;
+    }
+	
+	
 }

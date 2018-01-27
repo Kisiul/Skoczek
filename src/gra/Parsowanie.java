@@ -1,3 +1,4 @@
+package gra;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ public class Parsowanie {
 		private static int[] y;
 		private static int[] dl;
 		private int a;
-		private File f;
+		private String st;
 		private Properties properties;
 /**
 *	Konstruktor
@@ -27,7 +28,6 @@ public class Parsowanie {
 		public Parsowanie()
 		{
 		    //Plik z konfiguracj¹
-			f= new File("conf.properties");
 			//przysz³y obiekt Properties
 			properties = new Properties();
 			
@@ -37,7 +37,7 @@ public class Parsowanie {
 
 
 
-	    public void loadProperties(){
+	    public void loadProperties(File f){
 	        //Strumieñ wejœciowy
 	        InputStream is;
 	        try {
@@ -61,6 +61,14 @@ public class Parsowanie {
 	    		System.out.println("Sprawdz pisownie klucza properties"+ a);
 	    	}	
 	    }
+	    private void parsujvstring(String s)
+	    {
+	    	try {
+	    	st = properties.getProperty(s);
+	    	} catch (IllegalArgumentException a) {
+	    		System.out.println("Sprawdz pisownie klucza properties"+ a);
+	    	}	
+	    }
 	    /**
 	    *wywoluje metode prywatana, bo nie moglem zroib dla returna try -kacza
 	    */
@@ -69,6 +77,11 @@ public class Parsowanie {
 	    	parsujv(s);
     		return a;
 	    }
+		public String parsuj_string(String s)
+		{
+			parsujvstring(s);
+			return st;
+		}
 	   public Properties getProperties() {
 			return properties;
 		}
