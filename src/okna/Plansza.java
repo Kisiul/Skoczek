@@ -28,7 +28,19 @@ public class Plansza extends JPanel {
 	private File f;
 	private JLabel l_czas;
 	long i=0;
+	/**
+	 * tablica przechowuj¹ca dane o planszy
+	 * 0- œciana
+	 * 1- wolna przestrzeñ
+	 * 2- okno
+	 */
+	private int[][] plansza;
+	/**
+	 * romiar kafelka (bedzie zdefiniowany jako szerokosc okna/liczba kafelków)
+	 */
+	public int kwadracik;
 	
+	public int xKulka, yKulka;
 
 
 /**
@@ -57,7 +69,7 @@ public class Plansza extends JPanel {
 
 		rysujPlansze(1, g);
 		g.setColor(Color.red);
-		g.fillRect(stan_gry.wez_pozycje_x(), stan_gry.wez_pozycje_y(), stan_gry.getInstance().getKwadracik(), stan_gry.getInstance().getKwadracik());
+		g.fillRect(stan_gry.wez_pozycje_x(), stan_gry.wez_pozycje_y(), kwadracik, kwadracik);
 		
 		l_czas.setText(Long.toString(stan_gry.wez_czas()/1000));
 	}
@@ -65,34 +77,40 @@ public class Plansza extends JPanel {
 /** rysuje kwadraty zgodnie z plikiem konfigura, skoczek rysowany jest oddzielnie w paintcomponent*/	
 	public void rysujPlansze(int num, Graphics g)
 	{
-		//Graphics2D g2d = (Graphics2D) g;		
-		for (int j= 0; j<12; j++)
+		//Graphics2D g2d = (Graphics2D) g;
+		plansza = pars.odczytZPliku(num);
+		int szerokosc = pars.getszerokosc();
+		int wysokosc = pars.getwysokosc();
+		if (getHeight()<getWidth())
+			kwadracik = getHeight()/(wysokosc+1);
+		else
+			kwadracik = getWidth()/(szerokosc+1);
+		
+		for (int j= 0; j<wysokosc; j++)
 		{
-			for (int i= 0; i<12; i++)
+			for (int i= 0; i<szerokosc; i++)
 			{
-				if (stan_gry.getInstance().getPlansza()[j][i] == 0)
+				if (plansza[j][i] == 0)
 				{
 					g.setColor(Color.GRAY);
+					g.fillRect(i*kwadracik, j*kwadracik, kwadracik, kwadracik);
 				}
-				if (stan_gry.getInstance().getPlansza()[j][i] == 2)
+				if (plansza[j][i] == 2)
 				{
 					g.setColor(Color.blue);
+					g.fillRect(i*kwadracik, j*kwadracik, kwadracik, kwadracik);
 				}
-				if ((stan_gry.getInstance().getPlansza()[j][i] == 1) ||(stan_gry.getInstance().getPlansza()[j][i] == 3) )
+				if ((plansza[j][i] == 1) ||(plansza[j][i] == 3) )
 				{
 					g.setColor(Color.WHITE);
+					g.fillRect(i*kwadracik, j*kwadracik, kwadracik, kwadracik);
 				}
-				if (stan_gry.getInstance().getPlansza()[j][i] == 4)
+				if (plansza[j][i] == 3) 
 				{
-					g.setColor(Color.yellow);
+					xKulka = i*kwadracik;
+					yKulka = j*kwadracik;
 				}
-				if (stan_gry.getInstance().getPlansza()[j][i] == 5)
-				{
-					g.setColor(Color.BLACK);
-				}
-				
-
-				g.fillRect(i*stan_gry.getInstance().getKwadracik(), j*stan_gry.getInstance().getKwadracik(), stan_gry.getInstance().getKwadracik(), stan_gry.getInstance().getKwadracik());		
+			
 			}
 		}
 	}
