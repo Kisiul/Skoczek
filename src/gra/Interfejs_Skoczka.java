@@ -1,4 +1,8 @@
 package gra;
+
+/**
+*Interfejs skoczka- zawiera metody do sterowania skoczkiem
+*/
 public interface Interfejs_Skoczka{
 	
 	void uaktualnij_pozycje();

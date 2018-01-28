@@ -10,6 +10,13 @@ import javax.swing.JLabel;
 
 import gra.Parsowanie;
 
+/**
+* Ranking
+*<p>
+*Okno wyÅ›wietlajÄ…ce ranking wczytnay z pliku .properties
+*<p>
+*/
+
 public class Okno_Ranking {
 		
 	private JFrame okno_ranking;
@@ -24,7 +31,7 @@ public class Okno_Ranking {
 		okno_ranking = new JFrame("ranking");// tworze za kazdym razem nowa ramke
 		okno_ranking.setLocation(50, 0); //lokalizacja, docelowo pewnie jakis center, a nie wpsolrzedne
 		okno_ranking.setSize(250, 400); //rozmiar
-		okno_ranking.setVisible(true); //widoczne, przy zamykaniu ustawiane na fa³sz
+		okno_ranking.setVisible(true); //widoczne, przy zamykaniu ustawiane na falsz
 		
 		JLabel l_ranking = new JLabel(); //w label wpisywany bedzie ranking
 		String st = new String("<html><p style=\"word-spacing: 1cm\">nr.         nick     czas\n<br><br>"); //nazwy kategorii w rankingu
@@ -34,7 +41,7 @@ public class Okno_Ranking {
 		st+="</p></html>";
 
 		l_ranking.setBounds(40,20, 150, 200); //polozenie lebela
-		l_ranking.setText(st); //wstawiamy tekst ustaliny w forze wy¿ej
+		l_ranking.setText(st); //wstawiamy tekst ustaliny w forze wyzej
 		okno_ranking.add(l_ranking); //dodajemy label
 		
 		JButton b_wyjscie = new JButton("wyjscie"); 

@@ -7,6 +7,8 @@ import java.awt.Color;
  *Klasa zawiera dane biegajacego ludzika:
  *	- pozycje
  *	- grafike-obrazek/animacje
+ *	- ustawiacze
+ *	- zwracacze
  */
 public class Skoczek {
 	private int pozycja_skoczka_x;
@@ -19,7 +21,7 @@ public class Skoczek {
 	
 	
 	
-// getters n setters	
+// getters and setters	
 	public int getPozycja_skoczka_x() {
 		return pozycja_skoczka_x;
 	}

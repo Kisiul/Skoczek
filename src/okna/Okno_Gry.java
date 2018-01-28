@@ -43,7 +43,7 @@ public class Okno_Gry implements  KeyListener{//, Runnable{
 	/** 
     * Konstruktor klasy.
     *
-    * @param s Referencja do obiektu klasy Status.
+    * 
     */
 	public Okno_Gry(){
 		
@@ -73,7 +73,7 @@ public class Okno_Gry implements  KeyListener{//, Runnable{
 		//ustawienie rozmiarow okna do wielkosci panelu gry
 		okno_gry.setSize(pars.parsuj("rozmiar_planszy_x")*2+10, pars.parsuj("rozmiar_planszy_y")+10);
 		
-		/**przycisk zatrzymujacy gre, wstzrymuje ruch oraz zliczanie czasu, po wcisnieciu zmienia sie w przycisk "gra", pozwalajacy na powrót do gry*/
+		/**przycisk zatrzymujacy gre, wstzrymuje ruch oraz zliczanie czasu, po wcisnieciu zmienia sie w przycisk "gra", pozwalajacy na powrot do gry*/
 		JButton b_pauza = new JButton("pauza");
 		b_pauza.setBounds(300,10, 100, 20);
 		b_pauza.setFocusable(false);
@@ -118,7 +118,7 @@ public class Okno_Gry implements  KeyListener{//, Runnable{
 		//Akcja po wcinieciu "wyjscie"
 		b_wyjscie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){ 
-				System.out.println("wyjœcie");
+				System.out.println("wyjscie");
 				status_gry.stan_gry = Status.stan_gry.MENU_GL;
 				okno_gry.setVisible(false);	
 			}

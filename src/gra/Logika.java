@@ -68,7 +68,7 @@ Timer timer_logiczny;
 				stan_gry.getInstance().ustaw_pozycje(stan_gry.getInstance().wez_pozycje_x(), przeszkoda_gora(i)-pars.parsuj("rozmiar_skoczka")-1);
 			}	
 		}
-		else //jak od do�u to odbic
+		else //jak od dolu to odbic
 			if (skoczek_lewo() < przeszkoda_prawo(i)-10 && skoczek_prawo()> przeszkoda_lewo(i)+10 && skoczek_gora()<przeszkoda_dol(i) && skoczek_dol()>przeszkoda_dol(i))
 					{
 						stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), stan_gry.getInstance().wez_predkosc_y()*-1);
@@ -89,18 +89,31 @@ Timer timer_logiczny;
 
 	}
 	
+	/**
+	*zwiększenie prędkości skoczka
+	*/
+
 	public void lewo()
 	{
 		stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x()-1, stan_gry.getInstance().wez_predkosc_y());
 	}
+	/**
+	*zwiększenie prędkości skoczka
+	*/
 	public void prawo()
 	{
 		stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x()+1, stan_gry.getInstance().wez_predkosc_y());
 	}
+	/**
+	*zwiększenie prędkości skoczka
+	*/
 	public void gora()
 	{
 		stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), stan_gry.getInstance().wez_predkosc_y()-1);
 	}
+	/**
+	*zwiększenie prędkości skoczka
+	*/
 	public void dol()
 	{
 			stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), stan_gry.getInstance().wez_predkosc_y()+1);
@@ -169,7 +182,10 @@ Timer timer_logiczny;
 
 
 	
-	// wspolrzedne y skoczka dolnej krawedzi
+	/**
+	*wspolrzedne skoczka dolnej krawedzi
+	*
+	*/
 	public int skoczek_dol()
 	{
 		return stan_gry.getInstance().wez_pozycje_y()+pars.parsuj("rozmiar_skoczka");
@@ -186,6 +202,10 @@ Timer timer_logiczny;
 	{
 		return stan_gry.getInstance().wez_pozycje_x()+pars.parsuj("rozmiar_skoczka");
 	}
+
+	/**
+	* Obsługa przeszkód
+	*/
 	public int przeszkoda_dol(int i)
 	{
 		return pars.parsuj("y"+i)+12;
@@ -204,7 +224,7 @@ Timer timer_logiczny;
 	}
 	
 	
-	/**Metoda wywolana po wcisnieciu klawisza "pause" czyli zamro�enie rozgrywki*/
+	/**Metoda wywolana po wcisnieciu klawisza "pause" czyli zamrozenie rozgrywki*/
 	public void pause()
 	{
 		tmp_pred_x = stan_gry.getInstance().wez_predkosc_x(); // zapis predkosci, zeby po playu byly dokladnie te same parametry

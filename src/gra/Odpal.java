@@ -1,9 +1,9 @@
 package gra;
-
+import gra.*;
 /**
- * G³ówna klasa programu
- * Tylko uruchamia grê
- * @author Radek i Krzyœ
+ * Glona klasa programu
+ * Tylko uruchamia gre
+ * @author Radoslaw i Krzysztof
  *
  */
 public class Odpal {
