@@ -145,7 +145,10 @@ public class Status{
 	
 
 
-//singletowy getinstance
+/**
+*singletowy getinstance
+*@return instancja
+*/
 	public static Status getInstance() {
         if (INSTANCE == null)
             synchronized (Status.class) {

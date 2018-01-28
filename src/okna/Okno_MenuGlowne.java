@@ -43,7 +43,7 @@ public class Okno_MenuGlowne{
 	public synchronized void Menu_Glowne_Rozpocznij(){
 		
 		pars = new Parsowanie();
-		/** £aduje plik z najlepszymi wynikami*/
+		/** laduje plik z najlepszymi wynikami*/
 		pars.loadProperties(new File("ranking.properties"));
 		
 		okno_menu = new JFrame("Menu Glowne");
@@ -83,7 +83,7 @@ public class Okno_MenuGlowne{
     	});
 		
 // ======= 	POMOC ======
-		/** Przycisk s³uzy do wyswietlenia okna z zasadami gry*/
+		/** Przycisk sluzy do wyswietlenia okna z zasadami gry*/
     	JButton pomoc = new JButton("Pomoc");
 		pomoc.setBounds(150, 150, 100, 30);
 		// przypisanie akcji do przycisku 
@@ -101,8 +101,8 @@ public class Okno_MenuGlowne{
               	
         }  
     	});
-// ======= 	WYJŒCIE ======
-		/** Przycisk s³uzy do zakonczenia dzialania aplikacji*/
+/*======= 	WYJSCIE ======*/
+		/** Przycisk sluzy do zakonczenia dzialania aplikacji*/
 		JButton wyjscie = new JButton("Wyjscie");
 		wyjscie.setBounds(150, 200, 100, 30);
 		// przypisanie akcji do przycisku nowa gra.

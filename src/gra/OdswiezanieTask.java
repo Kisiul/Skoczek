@@ -4,10 +4,24 @@ import java.util.TimerTask;
 import status.Status;
 import okna.Plansza;
 
-public class OdswiezanieTask extends TimerTask {
-Plansza p;
-Status stan_gry;
 
+/**
+ * Klasa, której zadaniem jest odświeżanie stanu gry i  ekranu.
+ * @author      Radosław Maksymiuk i Krzystzof Dąbrowski
+ */
+public class OdswiezanieTask extends TimerTask {
+/**
+*Referencja do planszy
+*/
+Plansza p;
+/**
+*Referencja do statusu gry
+*/
+Status stan_gry;
+/**
+*Funkcja odświeżająca
+*@param plansz referencja do planszy
+*/
 public OdswiezanieTask(Plansza plansz){
   p=plansz;
 }

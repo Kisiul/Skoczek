@@ -29,14 +29,14 @@ public class Plansza extends JPanel {
 	private JLabel l_czas;
 	long i=0;
 	/**
-	 * tablica przechowuj¹ca dane o planszy
-	 * 0- œciana
-	 * 1- wolna przestrzeñ
+	 * tablica przechowujaca dane o planszy
+	 * 0- sciana
+	 * 1- wolna przestrzeÅ„
 	 * 2- okno
 	 */
 	private int[][] plansza;
 	/**
-	 * romiar kafelka (bedzie zdefiniowany jako szerokosc okna/liczba kafelków)
+	 * romiar kafelka (bedzie zdefiniowany jako szerokosc okna/liczba kafelkow)
 	 */
 	public int kwadracik;
 	
@@ -45,7 +45,7 @@ public class Plansza extends JPanel {
 
 /**
 *	Konstruktor.
-*
+*@param s globalny status gry
 */
 	public Plansza(Status s){
 		stan_gry = s;
@@ -74,7 +74,11 @@ public class Plansza extends JPanel {
 		l_czas.setText(Long.toString(stan_gry.wez_czas()/1000));
 	}
 	
-/** rysuje kwadraty zgodnie z plikiem konfigura, skoczek rysowany jest oddzielnie w paintcomponent*/	
+/** 
+*rysuje kwadraty zgodnie z plikiem konfigura, skoczek rysowany jest oddzielnie w paintcomponent
+*@param num co wczytaÄ‡?
+*@param g referencja do grafiki
+*/	
 	public void rysujPlansze(int num, Graphics g)
 	{
 		//Graphics2D g2d = (Graphics2D) g;

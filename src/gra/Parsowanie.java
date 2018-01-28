@@ -11,8 +11,9 @@ import java.util.Scanner;
 
 /**
 *	Parsowanie.
-*
+*	<p>
 *	Klasa zawierajaca metody do parsowania plikow konfiguracyjnych.
+*   <p>
 */
 public class Parsowanie {
 
@@ -30,8 +31,10 @@ public class Parsowanie {
 */
 		public Parsowanie()
 		{
-		    //Plik z konfiguracj¹
-			//przysz³y obiekt Properties
+		    //Plik z konfiguracją
+			/**
+			*przyszły obiekt Properties
+			*/
 			properties = new Properties();
 			
 			System.setProperty("file.encoding", "UTF-8");
@@ -39,13 +42,16 @@ public class Parsowanie {
 	 
 
 
-
+		/**
+		*Ładowanie właściwości
+		*@param f referencja do pliku do wczytania.
+		*/
 	    public void loadProperties(File f){
 	        //Strumieñ wejœciowy
 	        InputStream is;
 	        try {
 	            is = new FileInputStream(f);
-	            //³adujemy nasze ustawienia
+	            //ładujemy nasze ustawienia
 	            properties.load(is);
 	        } catch (FileNotFoundException e) {
 	            e.printStackTrace();
@@ -54,7 +60,9 @@ public class Parsowanie {
 	        }
 	    }
 	    /**
-	    *zwraca wartosc klucza properties, rzuca wyjatek, jesli zle podana nazwa klucza
+	    *Przypisuje wartosc klucza properties, rzuca wyjatek, jesli zle podana nazwa klucza
+	    *@param s nazwa parsowanej właściwości.
+	    *@throws exception
 	    */
 	    private void parsujv(String s)
 	    {
@@ -73,23 +81,38 @@ public class Parsowanie {
 	    	}	
 	    }
 	    /**
-	    *wywoluje metode prywatana, bo nie moglem zroib dla returna try -kacza
+	    *Wywołuje metodę prywataną, bo nie moglem zrobić dla returna try -kacza.
+	    *@param s nazwa parsowanej właściwości.
+	    *@return wartość liczbowa parsowanej własności
 	    */
 		public int parsuj(String s)
 	    {
 	    	parsujv(s);
     		return a;
 	    }
+	      /**
+	    *Wywołuje metodę prywataną, bo nie moglem zrobić dla returna try -kacza.
+	    *@param s nazwa parsowanej właściwości.
+	    *@return string - parsowany tekst
+	    */
 		public String parsuj_string(String s)
 		{
 			parsujvstring(s);
 			return st;
 		}
+		/**
+		*Zwraca referencję do obiektu Properties
+		*@return zwracana referencja
+		*/
 	   public Properties getProperties() {
 			return properties;
 		}
 	   
-	   /** metoda sluzy do odczytu ukladu planszy, zapisanego jako uklad zer, jedynek i jeszcze jakichs cyferek*/
+	   /** 
+	   *metoda sluzy do odczytu ukladu planszy, zapisanego jako uklad zer, jedynek i jeszcze jakichs cyferek
+	   *@param a wybór pliku konfiguracyjnego.
+	   *@return tablica reprezentująca planszę
+	   */
 	   public int[][] odczytZPliku(int a)
 		{
 			//if (a<=maxLevel)
@@ -119,11 +142,16 @@ public class Parsowanie {
 			}
 			return plansza;
 		}
-	   
+	   /**
+	   *@return wysokość planszy
+	   */
 		public int getwysokosc()
 		{
 			return rozmiar1;
 		}
+		/**
+		*@return wysokość planszy
+		*/
 		public int getszerokosc()
 		{
 			return rozmiar2;

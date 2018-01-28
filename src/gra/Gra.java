@@ -8,10 +8,10 @@ import status.Status;
 *	Gra Skoczek.
 *
 *	Projekt programistyczny z przedmiotu PROZE.
-*	Opiekun: Krystian Ignasiak
+*	Opiekun: Krystian Ignasiak <br>
+*	RadosÅ‚aw Maksymiuk	<br>
+*	Krzysztof DÄ…browski
 *
-*	@author Radoslaw Maksymiuk
-*	@author Krzysztof Dabrowski
 */
 public class Gra {
 	
@@ -19,7 +19,7 @@ public class Gra {
 	Status status_gry;
 	private Thread thread;
 	private boolean running;
-	/**G³ówne okno, zawierajace menu. Otwierajace siê na poczatku gry*/
+	/**Glowne okno, zawierajace menu. Otwierajace sie na poczatku gry*/
 	private Okno_MenuGlowne okno_menu;
 
 	/** Konstruktor klasy Gra*/
