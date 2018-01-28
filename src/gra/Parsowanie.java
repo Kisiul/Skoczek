@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Scanner;
 
 
 
@@ -14,13 +15,15 @@ import java.util.Properties;
 *	Klasa zawierajaca metody do parsowania plikow konfiguracyjnych.
 */
 public class Parsowanie {
-		private static int liczba_przeszkod;
-		private static int[] x;
-		private static int[] y;
-		private static int[] dl;
+
 		private int a;
 		private String st;
 		private Properties properties;
+		
+		String plik;
+		private int rozmiar1, rozmiar2;
+		private int maxLevel;
+		private int plansza[][] ;
 /**
 *	Konstruktor
 *
@@ -84,6 +87,46 @@ public class Parsowanie {
 		}
 	   public Properties getProperties() {
 			return properties;
+		}
+	   
+	   /** metoda sluzy do odczytu ukladu planszy, zapisanego jako uklad zer, jedynek i jeszcze jakichs cyferek*/
+	   public int[][] odczytZPliku(int a)
+		{
+			//if (a<=maxLevel)
+				plik = "konfigura"+a+".txt";
+			
+			
+			File file = new File(plik);
+		      try {
+				Scanner in = new Scanner(file);
+				//while (in.hasNextInt())
+				//{
+				rozmiar1 = in.nextInt();
+				rozmiar2 = in.nextInt();
+				plansza = new int [rozmiar1][rozmiar2];
+				for (int i= 0; i<rozmiar1; i++)
+				{
+					for (int j=0; j< rozmiar2; j++)
+					{
+						plansza[i][j] = in.nextInt();
+					}
+				}
+				//}
+			      in.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return plansza;
+		}
+	   
+		public int getwysokosc()
+		{
+			return rozmiar1;
+		}
+		public int getszerokosc()
+		{
+			return rozmiar2;
 		}
 	
 }
