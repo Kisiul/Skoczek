@@ -1,6 +1,5 @@
 package status;
 
-import gra.Logika;
 import okna.Okno_Gry;
 import okna.Okno_MenuGlowne;
 import okna.Okno_Ranking;
@@ -37,10 +36,22 @@ public class Status{
 	private static int bonus_niepamietam;
 	private long czas_start, czas;
 	private boolean pauza;
+	/**
+	 * tablica przechowuj¹ca dane o planszy
+	 * 0- œciana
+	 * 1- wolna przestrzeñ
+	 * 2- okno
+	 */
+	private int[][] plansza;
+	/**
+	 * romiar kafelka (bedzie zdefiniowany jako szerokosc okna/liczba kafelków)
+	 */
+	private int kwadracik;
 /**
 *	Konstruktor
 *
 */
+	public int i, j;
 	private Status() {
     
 		stan_gry = Stan.MENU_GL;
@@ -56,20 +67,12 @@ public class Status{
 		czas_start = 0;
 		czas = 0;
 		pauza = false;
+		plansza = new int[12][12];
+		i= 0; j=0;
 //kjhkhgkjhgbkhbkjhbkjhvkhvkhvkjhblijhdfgldjglisugjs;odijeltijselivtnaleirthnaslithnalnifhsnlfgj
 	}
 	
-	public void tick()
-	{
-		switch(stan_gry)
-		{
-		case MENU_GL:
-		{
-			;
-			break;
-		}
-		}	
-	}
+
 
 	public synchronized void ustaw_pozycje(int x, int y){
 		pozycja_gracza[0] = x;
@@ -155,5 +158,20 @@ public class Status{
         return INSTANCE;
     }
 	
+	
+	public int[][] getPlansza() {
+		return plansza;
+	}
+
+	public void setPlansza(int[][] plansza) {
+		this.plansza = plansza;
+	}
+	public int getKwadracik() {
+		return kwadracik;
+	}
+
+	public void setKwadracik(int kwadracik) {
+		this.kwadracik = kwadracik;
+	}
 	
 }

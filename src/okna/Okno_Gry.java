@@ -38,8 +38,6 @@ public class Okno_Gry implements  KeyListener{//, Runnable{
 	private long czas_tmp;
 	
 
-
-
 	/** 
     * Konstruktor klasy.
     *
@@ -52,11 +50,11 @@ public class Okno_Gry implements  KeyListener{//, Runnable{
 		f= new File("conf.properties"); // plik z konfiguracja planszy
 		pars = new Parsowanie();
 		pars.loadProperties(f);
+		plansza = new Plansza(Status.getInstance());
 		logika = new Logika();
 		logika.ustaw_czas_start(System.currentTimeMillis()); //podczas tworzenia obiektu okno_gry wlaczamy licznik czasu- pomiar potrzebny do punktacji
-		logika.logika_rozpocznij();
 		
-		plansza = new Plansza(Status.getInstance());
+		
 
 		odswiezanie = new Timer();
 		odswiezanie.schedule(new OdswiezanieTask(plansza), 0, //initial delay

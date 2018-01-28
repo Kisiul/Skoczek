@@ -23,6 +23,8 @@ Parsowanie pars;
 private File f;
 private int tmp_x, tmp_y, tmp_pred_x, tmp_pred_y;
 private long czas_start;
+private int licznik_zoltych;
+private int[] tmp_zolte;
 
 private boolean koniec;
 
@@ -33,15 +35,22 @@ Timer timer_logiczny;
 *	Konstruktor.
 */
 	public Logika(){
+		
 		f= new File("conf.properties");
 		pars = new Parsowanie();
 		pars.loadProperties(f);
-
+		licznik_zoltych =0;
+		tmp_zolte = new int[2];
+		tmp_zolte[0] = 2;
+		tmp_zolte[1] = 2;
+		logika_rozpocznij();
 		koniec = false;
 
 		toolkit = Toolkit.getDefaultToolkit();
 		timer_logiczny = new Timer();
 		timer_logiczny.schedule(new LogikaTask(this), 0, 1 * 20); //co 20ms uaktualniana bedzie pozycja gracza.
+		
+		
 	}
 
 
@@ -54,48 +63,104 @@ Timer timer_logiczny;
 
 	}
 	
+	/** glowna metoda obslugujaca ruch i kolizje*/
 	@Override
-	public void uaktualnij_pozycje() 		
+	public void uaktualnij_pozycje() 	
 	{
-		//musi kazda przeszkode obadac za kazdym razem, wydaje sie malo optymalne, ale takie zycie
-		for (int i=1; i<=pars.parsuj("liczba_przeszkod"); i++)
-		{
-		if (stan_gry.getInstance().wez_predkosc_y()>0) //jak spada na przeszkode, to ma sie na niej zatrzymac, a jak od dolu to sie odbic
-		{
-			if (skoczek_lewo() < przeszkoda_prawo(i)-30 && skoczek_prawo()> przeszkoda_lewo(i)+30 && skoczek_dol()>przeszkoda_gora(i) && skoczek_gora()<przeszkoda_gora(i))
-			{
-				stan_gry.getInstance().ustaw_predkosc(0, 0);
-				stan_gry.getInstance().ustaw_pozycje(stan_gry.getInstance().wez_pozycje_x(), przeszkoda_gora(i)-pars.parsuj("rozmiar_skoczka")-1);
-			}	
-		}
-		else //jak od do³u to odbic
-			if (skoczek_lewo() < przeszkoda_prawo(i)-10 && skoczek_prawo()> przeszkoda_lewo(i)+10 && skoczek_gora()<przeszkoda_dol(i) && skoczek_dol()>przeszkoda_dol(i))
-					{
-						stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), stan_gry.getInstance().wez_predkosc_y()*-1);
-						//stan_gry.ustaw_pozycje(stan_gry.wez_pozycje_x() + stan_gry.wez_predkosc_x(), stan_gry.wez_pozycje_y() + stan_gry.wez_predkosc_y()+1); 
-
-					}
-		//od bokow ma sie odbijac
-			else 
-				if ((skoczek_dol() > przeszkoda_gora(i) && skoczek_gora() < przeszkoda_dol(i)) && 
-				((skoczek_prawo() > przeszkoda_lewo(i) && skoczek_prawo() < przeszkoda_prawo(i))||( skoczek_lewo() < przeszkoda_prawo(i)&&skoczek_lewo() > przeszkoda_lewo(i))))
-				{
-					stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x()*-1, stan_gry.getInstance().wez_predkosc_y()*-1);
-					System.out.println("boczek");
-				}
-		}
-		stan_gry.getInstance().ustaw_pozycje(stan_gry.getInstance().wez_pozycje_x() + stan_gry.getInstance().wez_predkosc_x(), stan_gry.getInstance().wez_pozycje_y() + stan_gry.getInstance().wez_predkosc_y()); 
 		
+		wygrywalnosc();
+		gdy_sobie_spada();
+		krawedzie();
+		stan_gry.getInstance().ustaw_pozycje(stan_gry.getInstance().wez_pozycje_x() + stan_gry.getInstance().wez_predkosc_x(), stan_gry.getInstance().wez_pozycje_y() + stan_gry.getInstance().wez_predkosc_y());	
 
 	}
+	/** metoda obsluguje zderzenie z krawedziami bocznymi (cyfra 5 w macierzy)*/
+	public void krawedzie()
+	{
+		int a = skoczek_dol()/30;  
+		int b = skoczek_polowa()/30;
+		int c = skoczek_polowa_poziom()/30;
+		int d = skoczek_prawo()/30;
+		int e = skoczek_lewo()/30;
+		if (stan_gry.getInstance().getPlansza()[a][b] == 5)
+		{
+			System.out.println("skucha");
+			stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), 0);
+		}
+		if (stan_gry.getInstance().getPlansza()[c][d] == 5 || stan_gry.getInstance().getPlansza()[c][e] == 5)
+			stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x()*-1, stan_gry.getInstance().wez_predkosc_y());
+
+		
+	}
+	/** metoda obsluguje chodzenie po podestach (cyfra 0 w macierzy, 4- podswietlenie na zolto)*/
+
+	public void gdy_sobie_spada()
+	{
+		stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), 2);
+		stan_gry.getInstance().getPlansza()[1][0] = 5;
+		
+		//ziomek na kafelku		
+		int a = skoczek_dol()/30;  
+		int b = skoczek_polowa()/30;
+		int c = skoczek_lewo1()/30;
+		if (stan_gry.getInstance().getPlansza()[a][b] == 0 || stan_gry.getInstance().getPlansza()[a][b] == 4) 
+		{
+			licznik_zoltych++;
+			//System.out.println("liczba zoltych: "+ licznik_zoltych);
+			if (licznik_zoltych>1)
+			{
+				int q = tmp_zolte[0];
+				int w = tmp_zolte[1];
+				stan_gry.getInstance().getPlansza()[q][w] = 1;
+				licznik_zoltych--;
+			}
+			stan_gry.getInstance().getPlansza()[a][b] = 4;
+			stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), 0);
+			tmp_zolte[0]=a;
+			tmp_zolte[1]=b;
+			
+		}
+		else if (licznik_zoltych>0 && stan_gry.getInstance().wez_predkosc_y()>0)
+		{
+			int q = tmp_zolte[0];
+			int w = tmp_zolte[1];
+			stan_gry.getInstance().getPlansza()[q][w] = 1;
+			licznik_zoltych--;
+		}	
+		if (stan_gry.getInstance().getPlansza()[a][b] == 4) 
+			stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x(), 0);		
+	}
+	/**metoda obsluguje dotarcie do celu*/
+	public void wygrywalnosc()
+	{
+		int b = skoczek_polowa()/30;
+		int c = skoczek_polowa_poziom()/30;
+		if (stan_gry.getInstance().getPlansza()[c][b] == 2)
+		{
+			System.out.println("WYGRYWALNOSC");
+		}
+		
+		
+		
+	}
 	
+
 	public void lewo()
 	{
-		stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x()-1, stan_gry.getInstance().wez_predkosc_y());
+		stan_gry.getInstance().ustaw_predkosc(-2, stan_gry.getInstance().wez_predkosc_y());
 	}
 	public void prawo()
 	{
-		stan_gry.getInstance().ustaw_predkosc(stan_gry.getInstance().wez_predkosc_x()+1, stan_gry.getInstance().wez_predkosc_y());
+		stan_gry.getInstance().ustaw_predkosc(2, stan_gry.getInstance().wez_predkosc_y());
+	}
+	
+	public void lewo_k()
+	{
+		stan_gry.getInstance().ustaw_predkosc(0, stan_gry.getInstance().wez_predkosc_y());
+	}
+	public void prawo_k()
+	{
+		stan_gry.getInstance().ustaw_predkosc(0, stan_gry.getInstance().wez_predkosc_y());
 	}
 	public void gora()
 	{
@@ -108,8 +173,23 @@ Timer timer_logiczny;
 
 
 	public void logika_rozpocznij() {
-		stan_gry.getInstance().ustaw_pozycje(pars.parsuj("pierwotna_pozycja_skoczka_x"), pars.parsuj("pierwotna_pozycja_skoczka_y"));
 		stan_gry.getInstance().ustaw_predkosc(0,  0);
+		System.out.println("ustawiam tu sobie npwa plansze");
+		stan_gry.getInstance().setPlansza(pars.odczytZPliku(1));
+		
+		int szerokosc = pars.getszerokosc();
+		int wysokosc = pars.getwysokosc();
+		stan_gry.getInstance().setKwadracik(400/(wysokosc+1));
+	
+		System.out.println("kwadracik: " +stan_gry.getInstance().getKwadracik());
+		for (int j= 0; j<12; j++)
+		{
+			for (int i= 0; i<12; i++)
+			{if (stan_gry.getInstance().getPlansza()[j][i] == 3) 
+					stan_gry.getInstance().ustaw_pozycje(i*stan_gry.getInstance().getKwadracik(),j*stan_gry.getInstance().getKwadracik());
+			}
+		}
+		
 	}
 
 	public void pauza(){
@@ -129,19 +209,15 @@ Timer timer_logiczny;
 			switch(keycode)
 			{
 			case 37:	/*left*/
-				System.out.println("lewo");
 				lewo();
 				break;
 			case 38:	/*up*/
-				System.out.println("gora");
 				gora();
 				break;
 			case 39:	/*right*/
-				System.out.println("prawo");
 				prawo();
 				break;
 			case 40:	/*down*/
-				System.out.println("dol");
 				dol();
 				break;
 			case 27:	/*escape*/
@@ -156,8 +232,20 @@ Timer timer_logiczny;
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
+	public void keyReleased(KeyEvent evt) {
 		// TODO Auto-generated method stub
+		int keycode = evt.getKeyCode();
+		switch(keycode)
+		{
+		case 37:	/*left*/
+			lewo_k();
+			break;
+		case 39:	/*right*/
+			prawo_k();
+			break;
+			default:
+				break;
+		}
 		
 	}
 
@@ -170,9 +258,17 @@ Timer timer_logiczny;
 
 	
 	// wspolrzedne y skoczka dolnej krawedzi
+	public int skoczek_polowa()
+	{
+		return stan_gry.getInstance().wez_pozycje_x()+15;
+	}
+	public int skoczek_polowa_poziom()
+	{
+		return stan_gry.getInstance().wez_pozycje_y()+15;
+	}
 	public int skoczek_dol()
 	{
-		return stan_gry.getInstance().wez_pozycje_y()+pars.parsuj("rozmiar_skoczka");
+		return stan_gry.getInstance().wez_pozycje_y()+30;
 	}
 	public int skoczek_gora()
 	{
@@ -182,10 +278,19 @@ Timer timer_logiczny;
 	{
 		return stan_gry.getInstance().wez_pozycje_x();
 	}
+	public int skoczek_lewo1()
+	{
+		return stan_gry.getInstance().wez_pozycje_x()+10;
+	}
 	public int skoczek_prawo()
 	{
-		return stan_gry.getInstance().wez_pozycje_x()+pars.parsuj("rozmiar_skoczka");
+		return stan_gry.getInstance().wez_pozycje_x()+30;
 	}
+	public int skoczek_prawo1()
+	{
+		return stan_gry.getInstance().wez_pozycje_x()+20;
+	}
+
 	public int przeszkoda_dol(int i)
 	{
 		return pars.parsuj("y"+i)+12;
