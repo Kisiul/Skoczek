@@ -2,6 +2,7 @@ package okna;
 import javax.swing.*;
 
 import gra.Parsowanie;
+import gra.Klient;
 import status.Status;
 
 import java.awt.event.*;
@@ -23,7 +24,8 @@ public class Okno_MenuGlowne{
 	private Okno_Gry okno_gry;
 	/** Okno z najlepszymi wynikami*/
 	private Okno_Ranking ranking;
-
+	/** Klient komunikacji sieciowej*/
+	private Klient klient;
 	/**
 	*	Konstruktor.
 	*
@@ -101,10 +103,29 @@ public class Okno_MenuGlowne{
               	
         }  
     	});
+
+    	// ======= 	KLIENT ======
+		/** Przycisk sluzy do wyswietlenia okna z najlepszymi wynikami*/
+		JButton klient_przycisk = new JButton("Klient");
+		klient_przycisk.setBounds(150, 200, 100, 30);
+		// przypisanie akcji do przycisku nowa gra.
+		klient_przycisk.addActionListener(new ActionListener(){  
+		
+		public void actionPerformed(ActionEvent e){  
+              	if(status_gry.getpolaczenie() == false){ //polaczenie mozna otworzyc tylko wtedy, kiedy nie ma innego;
+              		try{
+              		klient = new Klient(); //utworzenie nowego klienta sieciowego
+              		status_gry.setpolaczenie(true);
+              	}catch(IOException ex){
+              		System.out.println(ex);
+              	}
+				}      	
+        	}  
+    	});
 // ======= 	WYJŒCIE ======
 		/** Przycisk s³uzy do zakonczenia dzialania aplikacji*/
 		JButton wyjscie = new JButton("Wyjscie");
-		wyjscie.setBounds(150, 200, 100, 30);
+		wyjscie.setBounds(150, 250, 100, 30);
 		// przypisanie akcji do przycisku nowa gra.
 		wyjscie.addActionListener(new ActionListener(){  
 		public void actionPerformed(ActionEvent e){  
@@ -116,6 +137,7 @@ public class Okno_MenuGlowne{
 		okno_menu.add(nowa_gra);
 		okno_menu.add(najlepsze_wyniki);
 		okno_menu.add(pomoc);
+		okno_menu.add(klient_przycisk);
 		okno_menu.add(wyjscie);
 		// graficzne ustawienia
 		okno_menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -36,15 +36,19 @@ public class Status{
 	private static int bonus_niepamietam;
 	private long czas_start, czas;
 	private boolean pauza;
+
 	/**
-	 * tablica przechowuj¹ca dane o planszy
-	 * 0- œciana
-	 * 1- wolna przestrzeñ
-	 * 2- okno
+	* status polaczenia z serwerem
+	*/
+	private boolean polaczenie_serwera;
+	/**
+	 * tablica przechowuj?ca dane o planszy
+	 * 0- ?ciana
+	 * 1- wolna przestrze?	 * 2- okno
 	 */
 	private int[][] plansza;
 	/**
-	 * romiar kafelka (bedzie zdefiniowany jako szerokosc okna/liczba kafelków)
+	 * romiar kafelka (bedzie zdefiniowany jako szerokosc okna/liczba kafelk?)
 	 */
 	private int kwadracik;
 /**
@@ -67,6 +71,7 @@ public class Status{
 		czas_start = 0;
 		czas = 0;
 		pauza = false;
+		polaczenie_serwera = false;
 		plansza = new int[12][12];
 		i= 0; j=0;
 //kjhkhgkjhgbkhbkjhbkjhvkhvkhvkjhblijhdfgldjglisugjs;odijeltijselivtnaleirthnaslithnalnifhsnlfgj
@@ -144,6 +149,14 @@ public class Status{
 	public boolean getPauza()
 	{
 		return pauza;
+	}
+		public void  setpolaczenie(boolean b)
+	{
+		polaczenie_serwera = b;
+	}
+	public boolean getpolaczenie()
+	{
+		return polaczenie_serwera;
 	}
 	
 
